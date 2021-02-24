@@ -12,7 +12,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
-import { DisplayTagsPipe } from '../display-tag.pipe';
 import { TagsTransformPipe } from './tags-transform.pipe';
 @NgModule({
   declarations: [PetsComponent, TagsTransformPipe],

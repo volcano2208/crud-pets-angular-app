@@ -16,7 +16,7 @@
                     </mat-form-field>
                     <mat-error>
                         <span *ngIf="!categoryForm.get('name').valid && categoryForm.get('name').touched">Please enter
-              Category Name !</span>
+                            Category Name !</span>
                     </mat-error>
                     <button mat-raised-button color="accent" [disabled]="!categoryForm.valid || flag" [hidden]="flag==true">Create</button>
                     <button routerLink="/categories" routerLinkActive="active" [hidden]="flag==false" mat-raised-button (click)="updateCate()" color="primary" [disabled]="!categoryForm.valid">Update</button>
