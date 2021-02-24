@@ -19,8 +19,18 @@
                                 Pet Name !</span>
                         </mat-error>
                     </mat-form-field>
-                    <app-dropdownlist-category (sendCategory)="getCategory($event)" [receive]="receiveCategory">
-                    </app-dropdownlist-category>
+                    <mat-form-field appearance="fill" style="width: 100%;">
+                        <mat-label>Category</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>
+                            <span *ngIf="!petForm.get('category').valid && petForm.get('category').touched">Please
+                                choose
+                                Pet Category !</span>
+                        </mat-error>
+                    </mat-form-field>
                     <app-status formControlName="status"></app-status>
                     <mat-form-field appearance="fill" style="width: 100%;">
                         <mat-label>Tags</mat-label>
@@ -32,11 +42,11 @@
                                 Pet Tags !</span>
                         </mat-error>
                     </mat-form-field>
-                    <button mat-raised-button color="accent" [disabled]="isLoading || !petForm.valid " [hidden]="flag==true">
+                    <button mat-raised-button color="accent" [disabled]="isLoading  || !petForm.valid" [hidden]="flag==true">
                         <img src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg"
                             alt="loading" style="width: 20px;" *ngIf="isLoading">Create
                     </button>
-                    <button routerLink="/Pets" routerLinkActive="active" [hidden]="flag==false" mat-raised-button color="primary" (click)="updatePet()">Update</button>
+                    <button routerLink="/pets" routerLinkActive="active" [hidden]="flag==false" mat-raised-button color="primary" (click)="updatePet()" [disabled]="!petForm.valid">Update</button>
                 </form>
             </mat-card-content>
         </mat-card>

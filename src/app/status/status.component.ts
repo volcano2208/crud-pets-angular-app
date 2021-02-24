@@ -17,7 +17,7 @@ import { ControlValueAccessor, Validator, FormControl, NG_VALUE_ACCESSOR, NG_VAL
     }
   ],
 })
-export class StatusComponent implements ControlValueAccessor {
+export class StatusComponent implements ControlValueAccessor, Validator {
   statusList: string[] = ['available', 'pending', 'sold'];
   private statusData: string;
   onChange: (statusData: any) => void;
@@ -39,13 +39,15 @@ export class StatusComponent implements ControlValueAccessor {
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
   }
-  // registerOnValidatorChange?(fn: () => void): void {
-  //   throw new Error('Method not implemented.');
-  // }
+  validate(c: FormControl): ValidationErrors {
+    if (!this.statusData) {
+      return null;
+    }
+  }
   // tslint:disable-next-line: typedef
   handleOnStatusChange(event) {
     // tslint:disable-next-line: radix
-    const statusString: string = event.value;
+    const statusString: string = event.target.value;
     const statusSelect = this.statusList.find(status => status === statusString);
     this.writeValue(statusSelect);
     this.onChange(statusSelect);

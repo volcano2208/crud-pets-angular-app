@@ -16,6 +16,9 @@ import { DropdownlistCategoryComponent } from './pet-form/dropdownlist-category/
 import { LoggingInterceptor } from './logging.interceptor';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { ErrorpageRedirectInterceptor } from './errorpage-redirect.interceptor';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { MatProgressBar, MatProgressBarModule } from '@angular/material/progress-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
     PetFormComponent,
     StatusComponent,
     DropdownlistCategoryComponent,
+    ErrorPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,9 +39,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCardModule, MatSelectModule],
+    MatCardModule, MatSelectModule, MatProgressBarModule],
 
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: ErrorpageRedirectInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

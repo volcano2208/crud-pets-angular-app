@@ -23,15 +23,11 @@ export class PetFormComponent implements OnInit {
   petForm = this.formBuilder.group({
     id: null,
     name: new FormControl(null, Validators.required),
-    category: {
-      id: new FormControl(null, Validators.required)
-    },
-    status: new FormControl('', Validators.required),
+    category: new FormControl(null, Validators.required),
+    status: new FormControl(''),
     tags: new FormControl([], Validators.required),
     photoUrls: [],
   });
-  dataCategory: Category;
-  receiveCategory = '';
   idNumber: number;
   flag = false;
   isLoading = false;
@@ -49,7 +45,6 @@ export class PetFormComponent implements OnInit {
     setTimeout(() => {
       pet.id = Math.floor(Math.random() * 100 + 1); // set id identity và tăng dần
       pet.photoUrls = [''];
-      pet.category = this.dataCategory;
       this.petForm.reset();
       this.router.navigateByUrl('/pets');
       this.petService.create(pet).subscribe(
@@ -72,11 +67,18 @@ export class PetFormComponent implements OnInit {
           this.categories.push(pet.category);
         }
         localStorage.setItem('categories', JSON.stringify(this.categories));
-        this.receiveCategory = JSON.stringify(pet.category);
-        this.petForm.controls.category.setValue(pet.category.id);
+        const categoryX = this.categories.find(x => x.id === pet.category.id);
+        this.petForm.controls.category.setValue(categoryX);
         this.petForm.controls.status.setValue(pet.status);
-        this.petForm.controls.tags.setValue(pet.tags);
-        localStorage.setItem('tags', JSON.stringify(this.tags));
+        // tslint:disable-next-line: prefer-for-of
+        for (let index = 0; index < pet.tags.length; index++) {
+          const element = pet.tags[index];
+          if (!this.tags.find(x => x.id === element.id)) {
+            this.tags.push(element);
+          } else {
+            this.tags = pet.tags;
+          }
+        }
       },
       (error) => {
         console.log(error);
@@ -93,10 +95,6 @@ export class PetFormComponent implements OnInit {
         console.log(error);
       }
     );
-  }
-  // tslint:disable-next-line: typedef
-  getCategory(e) {
-    this.dataCategory = e;
   }
   getControl(key: string): AbstractControl {
     return this.petForm.get(key);
