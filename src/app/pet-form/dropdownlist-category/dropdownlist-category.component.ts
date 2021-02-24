@@ -19,10 +19,10 @@ export class DropdownlistCategoryComponent implements OnInit {
   // tslint:disable-next-line: typedef
   changeCategory(event) {
     if (this.receive === '') {
-      console.log(event.value);
       this.sendCategory.emit(event.value);
     }
   }
+  // tslint:disable-next-line: typedef
   changeReceive() {
     this.choiceCategory = JSON.parse(this.receive);
   }

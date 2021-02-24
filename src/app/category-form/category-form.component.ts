@@ -58,6 +58,8 @@ export class CategoryFormComponent implements OnInit {
         }
       }
       localStorage.setItem('categories', JSON.stringify(this.categories));
-    } catch (error) { }
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

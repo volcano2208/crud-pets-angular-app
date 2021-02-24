@@ -4,11 +4,8 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpResponse,
-  HttpErrorResponse
 } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { tap } from 'lodash';
 
 @Injectable()
 export class LoggingInterceptor implements HttpInterceptor {
