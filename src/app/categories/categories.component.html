@@ -1,0 +1,34 @@
+<button mat-raised-button [routerLink]="['/categories/category-form']" routerLinkActive="router-link-active"> Create Category
+</button>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let category"> {{category.id}} </td>
+        </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let category"> {{category.name}} </td>
+        </ng-container>
+        <!-- Function Edit Column -->
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let category">
+                <button mat-raised-button color="primary" [routerLink]="['category-form',category.id]" routerLinkActive="router-link-active">Edit</button>
+            </td>
+        </ng-container>
+        <!-- Function Delete Column -->
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let category">
+                <button mat-raised-button color="warn" (click)="delete(category.id)">Delete</button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+<router-outlet></router-outlet>
