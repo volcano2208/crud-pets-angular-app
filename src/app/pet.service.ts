@@ -23,7 +23,8 @@ export class PetService {
   }
 
   update(id: number, data: any): Observable<any> {
-    return this.http.put(`${'https://petstore.swagger.io/v2/pet'}/${id}`, data);
+    data.id = id;
+    return this.http.put('https://petstore.swagger.io/v2/pet', data);
   }
 
   delete(id: number): Observable<any> {
