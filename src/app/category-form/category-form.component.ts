@@ -35,8 +35,9 @@ export class CategoryFormComponent implements OnInit {
     this.categoryForm.value.id = lastCate ? lastCate.id + 1 : 1;
     this.categories.push(this.categoryForm.value);
     localStorage.setItem('categories', JSON.stringify(this.categories));
-    this.categoryForm.reset();
-    this.router.navigateByUrl('/categories');
+    console.log(this.categoryForm.value);
+    // this.categoryForm.reset();
+    // this.router.navigateByUrl('/categories');
   }
   getCateUpdate(): void {
     const idString = this.activeRouter.snapshot.paramMap.get('id');

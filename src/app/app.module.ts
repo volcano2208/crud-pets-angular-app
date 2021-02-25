@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ErrorpageRedirectInterceptor } from './errorpage-redirect.interceptor';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { MatProgressBar, MatProgressBarModule } from '@angular/material/progress-bar';
+import { DebounceClickDirective } from './debounce-click.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +29,7 @@ import { MatProgressBar, MatProgressBarModule } from '@angular/material/progress
     StatusComponent,
     DropdownlistCategoryComponent,
     ErrorPageComponent,
+    DebounceClickDirective,
   ],
   imports: [
     BrowserModule,
