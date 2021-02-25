@@ -18,7 +18,7 @@
                         <span *ngIf="!categoryForm.get('name').valid && categoryForm.get('name').touched">Please enter
                             Category Name !</span>
                     </mat-error>
-                    <button mat-raised-button color="accent" [disabled]="!categoryForm.valid || flag" [hidden]="flag==true" appDebounceClick [debounceTime]="5000" (click)="addCategory()" type="submit">Create</button>
+                    <button mat-raised-button color="accent" [disabled]="!categoryForm.valid || flag" [hidden]="flag==true" appDebounceClick [debounceTime]="3000" (debounceClick)="addCategory()">Create</button>
                     <button routerLink="/categories" routerLinkActive="active" [hidden]="flag==false" mat-raised-button (click)="updateCate()" color="primary" [disabled]="!categoryForm.valid">Update</button>
                 </form>
             </mat-card-content>

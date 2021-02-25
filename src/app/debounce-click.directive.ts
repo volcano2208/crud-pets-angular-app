@@ -4,7 +4,7 @@ import { debounceTime } from 'rxjs/operators';
 @Directive({
   selector: '[appDebounceClick]'
 })
-export class DebounceClickDirective {
+export class DebounceClickDirective implements OnInit, OnDestroy {
   @Input() debounceTime = 5000;
   @Output() debounceClick = new EventEmitter();
   private clicks = new Subject();
@@ -12,10 +12,14 @@ export class DebounceClickDirective {
 
   constructor() { }
 
+  // tslint:disable-next-line: use-lifecycle-interface
+  // tslint:disable-next-line: typedef
   ngOnInit() {
     this.subscription = this.clicks.pipe(debounceTime(this.debounceTime)).subscribe(e => this.debounceClick.emit(e));
   }
 
+  // tslint:disable-next-line: use-lifecycle-interface
+  // tslint:disable-next-line: typedef
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }

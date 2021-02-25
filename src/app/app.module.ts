@@ -20,6 +20,7 @@ import { ErrorpageRedirectInterceptor } from './errorpage-redirect.interceptor';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { MatProgressBar, MatProgressBarModule } from '@angular/material/progress-bar';
 import { DebounceClickDirective } from './debounce-click.directive';
+import { AppAlphabetOnlyDirective } from './pet-form/directives/app-alphabet-only.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +31,7 @@ import { DebounceClickDirective } from './debounce-click.directive';
     DropdownlistCategoryComponent,
     ErrorPageComponent,
     DebounceClickDirective,
+    AppAlphabetOnlyDirective,
   ],
   imports: [
     BrowserModule,
