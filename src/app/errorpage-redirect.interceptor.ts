@@ -4,12 +4,11 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpErrorResponse,
-  HttpResponse
+  HttpErrorResponse
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 @Injectable()
 export class ErrorpageRedirectInterceptor implements HttpInterceptor {
 
@@ -18,8 +17,14 @@ export class ErrorpageRedirectInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     return next.handle(req).pipe(
-      catchError((error) => {
-        this.router.navigateByUrl('404page');
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 404) {
+          this.router.navigateByUrl('404page');
+        } else if (
+          error.status === 500
+        ) {
+          console.log('Lỗi server');
+        }
         console.log('error is intercept');
         console.error(error);
         return throwError(error.message);

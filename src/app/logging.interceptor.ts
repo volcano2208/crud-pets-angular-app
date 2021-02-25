@@ -12,7 +12,7 @@ export class LoggingInterceptor implements HttpInterceptor {
   constructor() { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log(`Req Method is ` + request.method);
+    console.log(`Req Method is ` + request.method + `, Req Response Type is ` + request.responseType);
     const httpReq = request.clone({
       // body: 'day la phuong thuc lay tat ca pet co trang thai la pending'
     });
