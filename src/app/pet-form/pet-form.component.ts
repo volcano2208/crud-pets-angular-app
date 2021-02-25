@@ -1,5 +1,5 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Category } from '../category-form/category-form.component';
@@ -22,20 +22,20 @@ export class PetFormComponent implements OnInit {
   tags: Tag[] = JSON.parse(localStorage.getItem('tags'));
   petForm = this.formBuilder.group({
     id: null,
-    name: new FormControl(null, Validators.required),
+    name: new FormControl('', Validators.required),
     category: new FormControl(null, Validators.required),
-    status: new FormControl(''),
-    tags: new FormControl([], Validators.required),
+    status: new FormControl('', Validators.required),
+    tags: new FormControl([]),
     photoUrls: [],
   });
-  idNumber: number;
+  id: number;
   flag = false;
   isLoading = false;
   ngOnInit(): void {
     if (this.router.url.length > 14) {
-      // tslint:disable-next-line: radix
-      this.idNumber = parseInt(this.activeRoute.snapshot.paramMap.get('id'));
-      this.getUpdatePetById(this.idNumber);
+      // tslint:disable-next-line: no-string-literal
+      this.id = this.activeRoute.snapshot.params['id'];
+      this.getUpdatePetById(this.id);
       this.flag = true;
     }
   }
@@ -87,7 +87,7 @@ export class PetFormComponent implements OnInit {
   }
   // tslint:disable-next-line: typedef
   updatePet() {
-    this.petService.update(this.idNumber, this.petForm.value).subscribe(
+    this.petService.update(this.id, this.petForm.value).subscribe(
       (response) => {
         console.log(response);
       },
