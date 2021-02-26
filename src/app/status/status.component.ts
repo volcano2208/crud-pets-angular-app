@@ -39,9 +39,11 @@ export class StatusComponent implements ControlValueAccessor, Validator {
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
   }
-  validate(c: FormControl): ValidationErrors {
-    if (!this.statusData) {
+  validate(c: FormControl): ValidationErrors | null {
+    if (this.statusData === 'pending') {
       return null;
+    } else {
+      return { invalidForm: { valid: false } };
     }
   }
   // tslint:disable-next-line: typedef

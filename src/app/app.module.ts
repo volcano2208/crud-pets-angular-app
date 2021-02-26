@@ -21,6 +21,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { MatProgressBar, MatProgressBarModule } from '@angular/material/progress-bar';
 import { DebounceClickDirective } from './debounce-click.directive';
 import { AppAlphabetOnlyDirective } from './pet-form/directives/app-alphabet-only.directive';
+import { ProfileUserComponent } from './profile-user/profile-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { AppAlphabetOnlyDirective } from './pet-form/directives/app-alphabet-onl
     ErrorPageComponent,
     DebounceClickDirective,
     AppAlphabetOnlyDirective,
+    ProfileUserComponent,
   ],
   imports: [
     BrowserModule,

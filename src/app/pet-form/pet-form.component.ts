@@ -22,9 +22,9 @@ export class PetFormComponent implements OnInit {
   tags: Tag[] = JSON.parse(localStorage.getItem('tags'));
   petForm = this.formBuilder.group({
     id: null,
-    name: new FormControl('', Validators.required),
-    category: new FormControl(null, Validators.required),
-    status: new FormControl('', Validators.required),
+    name: new FormControl(null, [nameRangeValidator]),
+    category: new FormControl(null, [Validators.required]),
+    status: new FormControl(''),
     tags: new FormControl([]),
     photoUrls: [],
   });
@@ -100,3 +100,11 @@ export class PetFormComponent implements OnInit {
     return this.petForm.get(key);
   }
 }
+function nameRangeValidator(control: AbstractControl): { [key: string]: boolean } | null {
+  if (control.value === 'cat') {
+    console.log('validate error');
+    return { nameRange: true };
+  }
+  return null;
+}
+

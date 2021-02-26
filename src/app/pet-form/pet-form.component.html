@@ -13,7 +13,7 @@
                 <form [formGroup]="petForm" (ngSubmit)="toggleLoading(petForm.value)">
                     <mat-form-field appearance="fill" style="width: 100%;">
                         <mat-label>Name Pet</mat-label>
-                        <input matInput formControlName="name" required appAppAlphabetOnly>
+                        <input matInput formControlName="name">
                         <mat-error>
                             <span *ngIf="!petForm.get('name').valid && petForm.get('name').touched">Please enter
                                 Pet Name !</span>
