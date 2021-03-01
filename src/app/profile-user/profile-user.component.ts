@@ -28,7 +28,7 @@ export class ProfileUserComponent implements OnInit {
   }
   // tslint:disable-next-line: typedef
   onSubmit() {
-    console.log(this.form);
+    console.log(this.form.controls.constraint.get('age').value);
   }
 }
 export type ValidationErrors = {

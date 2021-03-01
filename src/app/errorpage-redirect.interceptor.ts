@@ -26,7 +26,6 @@ export class ErrorpageRedirectInterceptor implements HttpInterceptor {
           console.log('Lỗi server');
         }
         console.log('error is intercept');
-        console.error(error);
         return throwError(error.message);
       })
     );
