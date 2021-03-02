@@ -1,57 +1,43 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, Validator, FormControl, NG_VALUE_ACCESSOR, NG_VALIDATORS, ValidationErrors } from '@angular/forms';
+import * as forms from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-status',
   templateUrl: './status.component.html',
   styleUrls: ['./status.component.css'],
   providers: [
     {
-      provide: NG_VALUE_ACCESSOR,
+      provide: forms.NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => StatusComponent),
       multi: true,
     },
     {
-      provide: NG_VALIDATORS,
+      provide: forms.NG_VALIDATORS,
       useExisting: forwardRef(() => StatusComponent),
       multi: true,
     }
   ],
 })
-export class StatusComponent implements ControlValueAccessor, Validator {
+export class StatusComponent implements forms.ControlValueAccessor, forms.Validator {
   statusList: string[] = ['available', 'pending', 'sold'];
-  private statusData: string;
-  onChange: (statusData: any) => void;
+  public form = new FormGroup({
+    statusData: new FormControl('', Validators.required)
+  });
   onTouched: () => void;
   isDisabled: boolean;
-  isSelect(statusString: string): boolean {
-    const res = !this.statusData ? false : (statusString === this.statusData);
-    return res;
-  }
   writeValue(obj: any): void {
-    this.statusData = obj;
+    this.form.controls.statusData.setValue(obj);
   }
   registerOnChange(fn: any): void {
-    this.onChange = fn;
+    this.form.controls.statusData.valueChanges.subscribe(fn);
   }
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
   setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
+
   }
-  validate(c: FormControl): ValidationErrors | null {
-    if (this.statusData === 'pending') {
-      return null;
-    } else {
-      return { invalidForm: { valid: false } };
-    }
-  }
-  // tslint:disable-next-line: typedef
-  handleOnStatusChange(event) {
-    // tslint:disable-next-line: radix
-    const statusString: string = event.target.value;
-    const statusSelect = this.statusList.find(status => status === statusString);
-    this.writeValue(statusSelect);
-    this.onChange(statusSelect);
+  validate(c: forms.AbstractControl): forms.ValidationErrors | null {
+    return this.form.controls.statusData.valid ? null : { invalidForm: { valid: false } };
   }
 }
