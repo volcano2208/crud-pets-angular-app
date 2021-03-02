@@ -15,9 +15,9 @@ export class LoggingInterceptor implements HttpInterceptor {
     console.log(request.method + ' ' + request.responseType);
     const httpReq = request.clone({
       // body: 'day la phuong thuc lay tat ca pet co trang thai la pending'
-      setHeaders: {
-        Authorization: 'Bearer xx.yy.zz'
-      }
+      // setHeaders: {
+      //   Authorization: 'Bearer xx.yy.zz'
+      // }
     });
     return next.handle(httpReq);
   }

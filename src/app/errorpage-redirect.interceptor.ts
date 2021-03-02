@@ -20,9 +20,7 @@ export class ErrorpageRedirectInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 404) {
           this.router.navigateByUrl('404page');
-        } else if (
-          error.status === 500
-        ) {
+        } else if (error.status === 500) {
           console.log('Lỗi server');
         }
         console.log('error is intercept');
