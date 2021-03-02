@@ -13,6 +13,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { TagsTransformPipe } from './tags-transform.pipe';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
   declarations: [PetsComponent, TagsTransformPipe],
   imports: [
@@ -27,6 +28,6 @@ import { TagsTransformPipe } from './tags-transform.pipe';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatInputModule,
-  ]
+  ],
 })
 export class PetsModule { }
