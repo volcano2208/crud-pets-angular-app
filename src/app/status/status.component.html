@@ -1,7 +1,7 @@
-<form appearance="fill" style="width: 100%;">
-    <label>Status</label>
-    <select (focus)="onTouched()" [disabled]="isDisabled" (change)="handleOnStatusChange($event)">
+<mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Status</mat-label>
+    <select (focus)="onTouched()" [disabled]="isDisabled" (change)="handleOnStatusChange($event)" matNativeControl required>
         <option *ngFor="let status of statusList" [value]="status" [selected]="isSelect(status)">{{status}}
         </option>
     </select>
-</form>
+</mat-form-field>

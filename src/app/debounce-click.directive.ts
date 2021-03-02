@@ -9,21 +9,15 @@ export class DebounceClickDirective implements OnInit, OnDestroy {
   @Output() debounceClick = new EventEmitter();
   private clicks = new Subject();
   private subscription: Subscription;
-
   constructor() { }
-
-  // tslint:disable-next-line: use-lifecycle-interface
   // tslint:disable-next-line: typedef
   ngOnInit() {
     this.subscription = this.clicks.pipe(debounceTime(this.debounceTime)).subscribe(e => this.debounceClick.emit(e));
   }
-
-  // tslint:disable-next-line: use-lifecycle-interface
   // tslint:disable-next-line: typedef
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
   @HostListener('click', ['$event'])
   // tslint:disable-next-line: typedef
   clickEvent(event) {
@@ -31,5 +25,4 @@ export class DebounceClickDirective implements OnInit, OnDestroy {
     event.stopPropagation();
     this.clicks.next(event);
   }
-
 }

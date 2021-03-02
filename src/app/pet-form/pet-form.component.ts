@@ -79,6 +79,7 @@ export class PetFormComponent implements OnInit {
             this.tags = pet.tags;
           }
         }
+        console.log(this.petForm.controls.status.value);
       },
       (error) => {
         console.log(error);

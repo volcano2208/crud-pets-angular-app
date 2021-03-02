@@ -34,8 +34,6 @@ export class ProfileUserComponent implements OnInit {
 export type ValidationErrors = {
   [key: string]: any
 };
-// export type ValidatorFn = (c: AbstractControl) => ValidationErrors | null;
-// export type AsyncValidatorFn = (c: AbstractControl) => Promise<ValidationErrors | null> | Observable<ValidationErrors | null>;
 // tslint:disable-next-line: typedef
 export function forbiddenUsername(users = []) {
   return (c: AbstractControl) => {
