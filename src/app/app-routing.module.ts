@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'tags', loadChildren: () => import('./tags/tags.module').then(m => m.TagsModule) },
   { path: 'pets', loadChildren: () => import('./pets/pets.module').then(m => m.PetsModule) },
   { path: '404page', component: ErrorPageComponent },
-  { path: 'profile', component: ProfileUserComponent, canDeactivate: [UnsavedChangesGuard] }
+  { path: 'profile', component: ProfileUserComponent, canDeactivate: [UnsavedChangesGuard] },
+  { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
 ];
 
 @NgModule({

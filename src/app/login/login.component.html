@@ -1,0 +1,26 @@
+<mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="accountForm" (ngSubmit)="submit()">
+            <p>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Username" formControlName="username" required>
+                </mat-form-field>
+                <mat-error *ngIf="!accountForm.get('username').valid && accountForm.get('username').touched" class="alert alert-danger">
+                    Username is required
+                </mat-error>
+            </p>
+            <p>
+                <mat-form-field>
+                    <input type="password" matInput placeholder="Password" formControlName="password" required>
+                </mat-form-field>
+                <mat-error *ngIf="!accountForm.get('password').valid && accountForm.get('password').touched" class="alert alert-danger">
+                    Password is required
+                </mat-error>
+            </p>
+            <div class="button">
+                <button type="submit" mat-button>Login</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
