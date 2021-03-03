@@ -13,9 +13,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { TagsTransformPipe } from './tags-transform.pipe';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NotificationComponent } from './notification/notification.component';
+
 @NgModule({
-  declarations: [PetsComponent, TagsTransformPipe],
+  declarations: [PetsComponent, TagsTransformPipe, NotificationComponent],
   imports: [
     CommonModule,
     PetsRoutingModule,

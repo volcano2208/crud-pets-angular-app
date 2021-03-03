@@ -18,10 +18,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { ErrorpageRedirectInterceptor } from './errorpage-redirect.interceptor';
 import { ErrorPageComponent } from './error-page/error-page.component';
-import { MatProgressBar, MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DebounceClickDirective } from './debounce-click.directive';
 import { AppAlphabetOnlyDirective } from './pet-form/directives/app-alphabet-only.directive';
 import { ProfileUserComponent } from './profile-user/profile-user.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NotifyInterceptor } from './notify.interceptor';
+import { UnsavedChangesGuard } from './guards/unsaved-changes.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,10 +49,16 @@ import { ProfileUserComponent } from './profile-user/profile-user.component';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCardModule, MatSelectModule, MatProgressBarModule],
+    MatCardModule,
+    MatSelectModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule, MatSnackBarModule
+  ],
 
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: ErrorpageRedirectInterceptor, multi: true }],
+  { provide: HTTP_INTERCEPTORS, useClass: ErrorpageRedirectInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: NotifyInterceptor, multi: true }, UnsavedChangesGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

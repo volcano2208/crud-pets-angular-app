@@ -10,12 +10,12 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-html,
-body {
-    height: 100%;
+.error.mat-snack-bar-container {
+    background: #cc0000;
+    color: white;
 }
 
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+.success.mat-snack-bar-container {
+    background: #00cc00;
+    color: white;
 }

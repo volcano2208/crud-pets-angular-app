@@ -5,20 +5,20 @@ import {
   HttpEvent,
   HttpInterceptor,
 } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-
+import { Observable, timer } from 'rxjs';
+import { PetService } from './pet.service';
+import { finalize, switchMap } from 'rxjs/operators';
 @Injectable()
 export class LoggingInterceptor implements HttpInterceptor {
-  constructor() { }
+  constructor(public loaderService: PetService) { }
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log(request.method + ' ' + request.responseType);
-    const httpReq = request.clone({
-      // body: 'day la phuong thuc lay tat ca pet co trang thai la pending'
-      // setHeaders: {
-      //   Authorization: 'Bearer xx.yy.zz'
-      // }
-    });
-    return next.handle(httpReq);
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this.loaderService.isLoading.next(true);
+    return timer(2000).pipe(switchMap(() => next.handle(request).pipe(
+      finalize(() => {
+        this.loaderService.isLoading.next(false);
+      })
+    )));
   }
 }
+

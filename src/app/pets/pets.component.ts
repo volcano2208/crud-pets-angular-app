@@ -1,9 +1,13 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Category } from '../categories/categories.component';
 import { PetService } from '../pet.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotifierService } from '../notifier.service';
+
+
 
 export interface Pet {
   category: Category;
@@ -26,8 +30,10 @@ export interface Tag {
   templateUrl: './pets.component.html',
   styleUrls: ['./pets.component.css'],
 })
-export class PetsComponent implements AfterViewInit {
-  constructor(private petService: PetService) { }
+export class PetsComponent implements AfterViewInit, OnInit {
+  // tslint:disable-next-line: max-line-length
+  constructor(public petService: PetService, private cd: ChangeDetectorRef) { }
+
   displayedColumns: string[] = [
     'id',
     'name',
@@ -38,24 +44,29 @@ export class PetsComponent implements AfterViewInit {
     'edit',
     'delete',
   ];
-  dataSource: any;
-  hide = false;
+  dataSource = new MatTableDataSource<Pet>();
   pets: Pet[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   // tslint:disable-next-line: typedef
   ngAfterViewInit() {
+    this.cd.detectChanges();
+    // this.refresh();
+  }
+  ngOnInit(): void {
     this.getPets();
     this.refresh();
   }
   // tslint:disable-next-line: typedef
   getPets(): void {
     this.petService.getAll().subscribe((response) => {
-      this.hide = true;
       this.pets = response;
       this.dataSource = new MatTableDataSource<Pet>(this.pets);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      // tslint:disable-next-line: no-shadowed-variable
+    }, (error) => {
+      console.log(error);
     });
   }
   refresh(): void {
@@ -67,6 +78,7 @@ export class PetsComponent implements AfterViewInit {
         console.log(response);
         this.refresh();
       },
+      // tslint:disable-next-line: no-shadowed-variable
       (error) => {
         console.log(error);
       }

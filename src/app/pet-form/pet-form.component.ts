@@ -15,7 +15,7 @@ export class PetFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private petService: PetService,
+    public petService: PetService,
     private activeRoute: ActivatedRoute
   ) { }
   categories: Category[] = JSON.parse(localStorage.getItem('categories'));
@@ -79,7 +79,6 @@ export class PetFormComponent implements OnInit {
             this.tags = pet.tags;
           }
         }
-        console.log(this.petForm.controls.status.value);
       },
       (error) => {
         console.log(error);
