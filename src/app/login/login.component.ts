@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
+export class User {
+  id: number;
+  username: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  authdata?: string;
+}
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,13 +16,15 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
-  accountForm = this.fb.group({
-    username: new FormControl(''),
-    password: new FormControl('')
-  });
+  constructor(
+    private fb: FormBuilder) {
+  }
+  accountForm: FormGroup;
   ngOnInit(): void {
-
+    this.accountForm = this.fb.group({
+      username: new FormControl(''),
+      password: new FormControl('')
+    });
   }
   // tslint:disable-next-line: typedef
   submit() {
