@@ -53,7 +53,8 @@ import { UnsavedChangesGuard } from './guards/unsaved-changes.guard';
     MatCardModule,
     MatSelectModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule, MatSnackBarModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
 
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
